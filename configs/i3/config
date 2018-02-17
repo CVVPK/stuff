@@ -13,12 +13,12 @@
 set $mod Mod4
 
 #lock screen
-bindsym $mod+Shift+x exec i3lock --color "#383c4a"
+bindsym $mod+Shift+x exec i3lock --color "#000000"
 
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:Ubuntu 10
+font pango: Ubuntu 10
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -126,7 +126,7 @@ set $workspace5 "5:  Media"
 set $workspace6 "6: "
 set $workspace7 "7: "
 set $workspace8 "8: "
-set $workspace9 "9: "
+set $workspace9 "9:  Files"
 set $workspace10 "10:  Music"
 
 # switch to workspace
@@ -156,6 +156,9 @@ bindsym $mod+Shift+0 move container to workspace $workspace10
 # Set app to workspace default
 assign [class = "Google Play Music Desktop Player"] $workspace10
 assign [class = "Code"] $workspace2
+assign [class = "Nautilus"] $workspace9
+assign [title = "MDN"] $workspace2
+assign [title = "Netflix"] $workspace5
 assign [class = "Google-chrome"] $workspace3
 
 # reload the configuration file
@@ -195,6 +198,7 @@ bindsym $mod+x mode "resize"
 # finds out, if available)
 bar {
         status_command i3blocks -c ~/.config/i3/i3blocks.conf
+        position top
         # strip_workspace_numbers yes
         tray_output none
         colors{
@@ -216,6 +220,7 @@ exec --no-startup-id xrandr --output $monitor1 --auto --left-of $monitor2
 workspace $workspace1 output $monitor1
 workspace $workspace2 output $monitor1
 workspace $workspace4 output $monitor1
+workspace $workspace9 output $monitor1
 
 # Workspaces to Monitor 2
 workspace $workspace3 output $monitor2
@@ -228,6 +233,7 @@ exec_always feh --bg-scale /home/cv/Pictures/wallpaper.png
 # StartUp apps
 exec google-play-music-desktop-player
 exec code
+exec nautilus
 exec google-chrome
 exec --no-startup-id i3-msg 'workspace $workspace4; exec gnome-terminal; workspace $workspace1'
 
@@ -237,3 +243,7 @@ new_window 1pixel
 
 # No mouse follow
 focus_follows_mouse no
+
+# Program launches
+# Google Search
+bindsym $mod+Shift+S exec google-chrome https://www.google.ca/
